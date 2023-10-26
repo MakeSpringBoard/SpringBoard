@@ -3,5 +3,21 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
 
+	<select id="getAllBoards"
+		resultType="com.bit.board.model.dto.BoardDto">
+		SELECT
+		board_number AS boardNumber,
+		board_title AS boardTitle,
+		board_content AS boardContent,
+		board_image AS boardImage,
+		board_writer_profile AS boardWriterProfile,
+		board_write_date AS boardWriteDate,
+		board_click_count AS boardClickCount,
+		board_like_count AS boardLikeCount,
+		board_hate_count AS boardHateCount,
+		board_comment_count AS boardCommentCount
+		FROM
+		Board
+	</select>
 
 </mapper>

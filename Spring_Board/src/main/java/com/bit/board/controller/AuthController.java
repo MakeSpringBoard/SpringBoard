@@ -37,7 +37,7 @@ public class AuthController {
 	    UserDto userDto = userService.login(userId, userPassword);
 	    if (userDto != null) {
 	        session.setAttribute("user", userDto);
-	        return "redirect:/register"; // 로그인 성공 시 리다이렉트할 페이지
+	        return "redirect:/boardList"; // 로그인 성공 시 리다이렉트할 페이지
 	    } else {
 	        return "redirect:/login?error"; // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
 	    }

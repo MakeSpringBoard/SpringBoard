@@ -1,5 +1,8 @@
 package com.bit.board.service;
 
-public interface BoardService {
+import java.util.List;
+import com.bit.board.model.dto.BoardDto;
 
+public interface BoardService {
+    List<BoardDto> getAllBoards();
 }
