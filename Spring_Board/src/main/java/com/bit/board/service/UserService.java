@@ -1,5 +1,10 @@
 package com.bit.board.service;
 
-public interface UserService {
+import com.bit.board.model.dto.UserDto;
 
+public interface UserService {
+	
+    void registerUser(UserDto userDto);
+    UserDto login(String userId, String userPassword);
 }
+

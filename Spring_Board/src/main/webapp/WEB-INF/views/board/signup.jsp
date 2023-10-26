@@ -94,16 +94,16 @@ input[type="submit"]:hover, button:hover {
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form name="signupForm" action="signupAction.jsp" method="post"
-		onsubmit="return validateForm()">
+	<form name="signupForm" action="/registerAction" method="post"
+		onsubmit="return beforeSubmit()">
 		<table>
 			<tr>
 				<td><label for="id">아이디:</label></td>
-				<td><input type="text" id="id" name="id" required></td>
+				<td><input type="text" id="id" name="userId" required></td>
 			</tr>
 			<tr>
 				<td><label for="password">비밀번호:</label></td>
-				<td><input type="password" id="password" name="password"
+				<td><input type="password" id="password" name="userPassword"
 					required></td>
 			</tr>
 			<tr>
@@ -113,7 +113,7 @@ input[type="submit"]:hover, button:hover {
 			</tr>
 			<tr>
 				<td><label for="name">이름:</label></td>
-				<td><input type="text" id="name" name="name" required></td>
+				<td><input type="text" id="name" name="userName" required></td>
 			</tr>
 			<tr>
 				<td><label>주소:</label></td>
@@ -136,10 +136,27 @@ input[type="submit"]:hover, button:hover {
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="fullAddress" name="userAddress">
+		<div class="button-container">
+			<button type="submit">회원가입</button>
+			<button type="button" onclick="location.href='/login'">로그인</button>
+		</div>
 	</form>
-	<div class="button-container">
-		<button onclick="document.signupForm.submit()">회원가입</button>
-		<button onclick="location.href='login.jsp'">로그인</button>
-	</div>
+	<script>
+		function beforeSubmit() {
+			if (!validateForm()) {
+				return false;
+			}
+
+			var address = document.getElementById("address").value;
+			var detailAddress = document.getElementById("detailAddress").value;
+			var fullAddress = address + " " + detailAddress;
+
+			document.getElementById("fullAddress").value = fullAddress;
+
+			return true;
+		}
+	</script>
+
 </body>
 </html>
