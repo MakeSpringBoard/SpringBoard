@@ -5,4 +5,5 @@ import com.bit.board.model.dto.BoardDto;
 
 public interface BoardDao {
     List<BoardDto> getAllBoards();
+    void saveBoard(BoardDto board);
 }

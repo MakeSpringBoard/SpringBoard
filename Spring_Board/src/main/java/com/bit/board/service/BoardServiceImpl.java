@@ -16,4 +16,9 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardDto> getAllBoards() {
         return boardDao.getAllBoards();
     }
+    
+    @Override
+    public void saveBoard(BoardDto board) {
+        boardDao.saveBoard(board);
+    }
 }

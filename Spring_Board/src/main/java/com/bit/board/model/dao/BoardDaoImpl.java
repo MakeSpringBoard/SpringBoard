@@ -16,4 +16,9 @@ public class BoardDaoImpl implements BoardDao {
     public List<BoardDto> getAllBoards() {
         return sqlSession.selectList("boardMapper.getAllBoards");
     }
+    
+    @Override
+    public void saveBoard(BoardDto board) {
+        sqlSession.insert("boardMapper.saveBoard", board);
+    }
 }

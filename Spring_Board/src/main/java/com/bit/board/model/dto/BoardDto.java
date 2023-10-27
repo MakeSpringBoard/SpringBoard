@@ -1,5 +1,8 @@
 package com.bit.board.model.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BoardDto {
 	private int boardNumber;
 	private String boardTitle;
@@ -11,6 +14,10 @@ public class BoardDto {
 	private int boardLikeCount;
 	private int boardHateCount;
 	private int boardCommentCount;
+	
+	public void setBoardWriteDateToNow() {
+        this.boardWriteDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 	
 	public int getBoardNumber() {
 		return boardNumber;
