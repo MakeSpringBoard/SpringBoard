@@ -36,5 +36,20 @@ public class BoardServiceImpl implements BoardService {
     public void deleteBoard(int boardNumber) {
         boardDao.deleteBoard(boardNumber);
     }
+    
+    @Override
+    public void increaseClickCount(int boardNumber) {
+        boardDao.increaseClickCount(boardNumber);
+    }
+    
+    @Override
+    public void updateLikeCount(int boardNumber) {
+        boardDao.updateLikeCount(boardNumber);
+    }
+
+    @Override
+    public void updateDislikeCount(int boardNumber) {
+        boardDao.updateDislikeCount(boardNumber);
+    }
 
 }

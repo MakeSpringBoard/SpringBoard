@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>${board.boardTitle}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 비동기 요청 -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,7 +39,21 @@
             height: 50%;
             margin-bottom: 20px;
         }
+        .like-dislike-section {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .like-dislike-btn {
+        cursor: pointer;
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-left: 10px;
+    	}
+    	.like-dislike-btn.disabled {
+        	cursor: not-allowed;
+    	}
     </style>
+    
 </head>
 <body>
     <div class="container">
@@ -52,13 +67,47 @@
             <img src="${board.boardImage}" alt="${board.boardTitle}">
         </c:if>
         <p>${board.boardContent}</p>
+        <div class="buttons">
+    		<c:if test="${board.boardWriterId == user.userId}">
+        		<button onclick="location.href='/editBoard/${board.boardNumber}'">수정</button>
+        		<button onclick="location.href='/deleteBoard/${board.boardNumber}'">삭제</button>
+    		</c:if>
+    		<button onclick="location.href='/boardList'">목록</button>
+		</div>
+		<div class="like-dislike-section">
+    		<span id="likeCount">${board.boardLikeCount}</span>
+    		<span class="like-dislike-btn <c:if test="${board.boardWriterId == user.userId}">disabled</c:if>" 
+          		onclick="<c:if test="${board.boardWriterId != user.userId}">updateLikeDislike(${board.boardNumber}, 'like')</c:if>">좋아요</span> |
+    		<span id="dislikeCount">${board.boardHateCount}</span>
+    		<span class="like-dislike-btn <c:if test="${board.boardWriterId == user.userId}">disabled</c:if>" 
+          		onclick="<c:if test="${board.boardWriterId != user.userId}">updateLikeDislike(${board.boardNumber}, 'dislike')</c:if>">싫어요</span>
+		</div>
+        <script>
+        function updateLikeDislike(boardNumber, type) {
+            $.ajax({
+                url: '/updateLikeDislike',
+                type: 'POST',
+                data: {
+                    boardNumber: boardNumber,
+                    type: type
+                },
+                success: function(response) {
+                    if (response.success) {
+                        if (type === 'like') {
+                            $('#likeCount').text(response.newCount);
+                        } else if (type === 'dislike') {
+                            $('#dislikeCount').text(response.newCount);
+                        }
+                    } else {
+                        alert('오류가 발생했습니다. 다시 시도해주세요.');
+                    }
+                },
+                error: function() {
+                    alert('서버와의 통신 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    </script>
     </div>
-    <div class="buttons">
-    <c:if test="${board.boardWriterId == user.userId}">
-        <button onclick="location.href='/editBoard/${board.boardNumber}'">수정</button>
-        <button onclick="location.href='/deleteBoard/${board.boardNumber}'">삭제</button>
-    </c:if>
-    <button onclick="location.href='/boardList'">목록</button>
-</div>
 </body>
 </html>

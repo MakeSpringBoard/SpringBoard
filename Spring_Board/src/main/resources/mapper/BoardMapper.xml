@@ -62,5 +62,24 @@
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM board WHERE board_number = #{boardNumber}
 	</delete>
+	
+	<update id="increaseClickCount" parameterType="int">
+    	UPDATE board
+    	SET board_click_count = board_click_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+	
+	<update id="updateLikeCount" parameterType="int">
+    	UPDATE board
+    	SET board_like_count = board_like_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+
+	<update id="updateDislikeCount" parameterType="int">
+    	UPDATE board
+    	SET board_hate_count = board_hate_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+	
 
 </mapper>

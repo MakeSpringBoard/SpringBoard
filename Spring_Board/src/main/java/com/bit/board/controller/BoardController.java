@@ -1,7 +1,9 @@
 package com.bit.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.board.model.dto.BoardDto;
@@ -76,14 +79,18 @@ public class BoardController {
     @RequestMapping("/board/{boardNumber}")
     public String viewBoard(@PathVariable int boardNumber, Model model, HttpSession session) {
     	UserDto user = (UserDto) session.getAttribute("user");
+    	BoardDto board = boardService.getBoard(boardNumber);
     	if (user != null) {
     	    System.out.println("세션 사용자 ID: " + user.getUserId());
     	    model.addAttribute("user", user); 
+    	    if (!user.getUserId().equals(board.getBoardWriterId())) {
+                // 현재 로그인한 사용자가 글 작성자가 아니면 조회수를 1 올린다.
+                boardService.increaseClickCount(boardNumber);
+            }
     	} else {
     	    System.out.println("세션 없음");
     	}
     	
-        BoardDto board = boardService.getBoard(boardNumber);
         model.addAttribute("board", board);
         return "board/boardInfo"; // 상세 페이지 JSP의 이름
     }
@@ -122,6 +129,25 @@ public class BoardController {
     public String deleteBoard(@PathVariable int boardNumber) {
         boardService.deleteBoard(boardNumber);
         return "redirect:/boardList";
+    }
+
+    @RequestMapping("/updateLikeDislike")
+    @ResponseBody
+    public Map<String, Object> updateLikeDislike(@RequestParam int boardNumber, @RequestParam String type) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        try {
+            if ("like".equals(type)) {
+                boardService.updateLikeCount(boardNumber);
+            } else if ("dislike".equals(type)) {
+                boardService.updateDislikeCount(boardNumber);
+            }
+            resultMap.put("success", true);
+            resultMap.put("newCount", boardService.getBoard(boardNumber).getBoardLikeCount()); 
+        } catch (Exception e) {
+            resultMap.put("success", false);
+            e.printStackTrace();
+        }
+        return resultMap;
     }
 
 

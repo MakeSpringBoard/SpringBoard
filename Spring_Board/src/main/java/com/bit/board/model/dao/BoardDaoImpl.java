@@ -36,5 +36,20 @@ public class BoardDaoImpl implements BoardDao {
     public void deleteBoard(int boardNumber) {
         sqlSession.delete("boardMapper.deleteBoard", boardNumber);
     }
+    
+    @Override
+    public void increaseClickCount(int boardNumber) {
+        sqlSession.update("boardMapper.increaseClickCount", boardNumber);
+    }
+    
+    @Override
+    public void updateLikeCount(int boardNumber) {
+        sqlSession.update("boardMapper.updateLikeCount", boardNumber);
+    }
+
+    @Override
+    public void updateDislikeCount(int boardNumber) {
+        sqlSession.update("boardMapper.updateDislikeCount", boardNumber);
+    }
 
 }
