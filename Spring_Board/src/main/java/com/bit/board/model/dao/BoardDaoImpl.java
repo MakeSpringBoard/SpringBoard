@@ -21,4 +21,20 @@ public class BoardDaoImpl implements BoardDao {
     public void saveBoard(BoardDto board) {
         sqlSession.insert("boardMapper.saveBoard", board);
     }
+    
+    @Override
+    public BoardDto selectBoard(int boardNumber) {
+        return sqlSession.selectOne("boardMapper.selectBoard", boardNumber);
+    }
+    
+    @Override
+    public void updateBoard(BoardDto board) {
+        sqlSession.update("boardMapper.updateBoard", board);
+    }
+
+    @Override
+    public void deleteBoard(int boardNumber) {
+        sqlSession.delete("boardMapper.deleteBoard", boardNumber);
+    }
+
 }

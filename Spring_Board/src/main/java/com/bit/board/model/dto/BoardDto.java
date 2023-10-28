@@ -8,6 +8,7 @@ public class BoardDto {
 	private String boardTitle;
 	private String boardContent;
 	private String boardImage;
+	private String boardWriterId;
 	private String boardWriterProfile;
 	private String boardWriteDate;
 	private int boardClickCount;
@@ -79,6 +80,13 @@ public class BoardDto {
 	public void setBoardCommentCount(int boardCommentCount) {
 		this.boardCommentCount = boardCommentCount;
 	}
-	
+
+	public String getBoardWriterId() {
+        return boardWriterId;
+    }
+
+    public void setBoardWriterId(String boardWriterId) {
+        this.boardWriterId = boardWriterId;
+    }
 	
 }

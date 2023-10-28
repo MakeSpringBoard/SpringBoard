@@ -54,6 +54,16 @@
             background-color: #218838;
         }
     </style>
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -69,9 +79,12 @@
             <textarea id="boardContent" name="boardContent" rows="10" required></textarea>
             
             <label for="boardImage">사진 첨부:</label>
-            <input type="file" id="boardImage" name="boardImage">
-            
+            <input type="file" id="boardImage" name="boardImage" onchange="previewImage(event)">
+            <img id="imagePreview" style="max-width: 30%; height: 30%;" />
+            <BR>
+            <CENTER>
             <button type="submit" class="btn">글 작성</button>
+            </CENTER>
         </form>
     </div>
 </body>

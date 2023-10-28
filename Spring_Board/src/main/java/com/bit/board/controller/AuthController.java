@@ -42,6 +42,12 @@ public class AuthController {
 	        return "redirect:/login?error"; // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
 	    }
 	}
+	
+	@RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();  // 세션을 무효화하여 로그아웃 처리
+        return "redirect:/login";  // 로그인 페이지로 리다이렉트
+    }
 
 	
 }

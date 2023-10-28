@@ -7,4 +7,11 @@ public interface BoardService {
     List<BoardDto> getAllBoards();
     
     void saveBoard(BoardDto board);
+    
+    BoardDto getBoard(int boardNumber);
+    
+    
+    void updateBoard(BoardDto board);
+    
+    void deleteBoard(int boardNumber);
 }
