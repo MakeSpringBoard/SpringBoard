@@ -82,6 +82,9 @@ p {
 		<c:if test="${empty sessionScope.user}">
 			<p>로그인하시면 이름을 표시합니다.</p>
 		</c:if>
+		<form action="/infoChange" method="post" style="display: inline;">
+			<input type="submit" value="정보 수정" class="btn" />
+		</form>
 		<form action="/logout" method="post" style="display: inline;">
 			<input type="submit" value="로그아웃" class="btn" />
 		</form>

@@ -29,6 +29,16 @@ public class UserDaoImpl implements UserDao {
         paramMap.put("userPassword", userPassword);
         return sqlSession.selectOne("userMapper.getUserByIdAndPassword", paramMap);
     }
+    
+    @Override
+    public UserDto getUserById(String userId) {
+        return sqlSession.selectOne("userMapper.getUserById", userId);
+    }
+    
+    @Override
+    public void updateUser(UserDto userDto) {
+        sqlSession.update("userMapper.updateUser", userDto);
+    }
 
 }
 

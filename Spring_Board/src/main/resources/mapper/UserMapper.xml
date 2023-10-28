@@ -15,5 +15,14 @@
 		#{userPassword}
 	</select>
 
+	<select id="getUserById" parameterType="string" resultType="com.bit.board.model.dto.UserDto">
+    	SELECT * FROM BoardUser WHERE user_id = #{userId}
+	</select>
+	
+	<update id="updateUser" parameterType="com.bit.board.model.dto.UserDto">
+    	UPDATE BoardUser
+    	SET user_password = #{userPassword}, user_name = #{userName}, user_address = #{userAddress}
+    	WHERE user_id = #{userId}
+	</update>
 
 </mapper>

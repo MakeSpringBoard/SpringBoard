@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bit.board.model.dto.UserDto;
@@ -47,6 +48,24 @@ public class AuthController {
     public String logout(HttpSession session) {
         session.invalidate();  // 세션을 무효화하여 로그아웃 처리
         return "redirect:/login";  // 로그인 페이지로 리다이렉트
+    }	
+	
+	@RequestMapping("/infoChange")
+    public String userInfo(HttpSession session, Model model) {
+        UserDto user = (UserDto) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", userService.getUserById(user.getUserId()));
+            return "board/infoChange";
+        } else {
+            return "redirect:/login";
+        }
+    }
+	
+	@RequestMapping("/updateAction")
+    public String updateUser(UserDto userDto, HttpSession session) {
+        userService.updateUser(userDto);
+        session.setAttribute("user", userService.getUserById(userDto.getUserId()));
+        return "redirect:/boardList";
     }
 
 	
