@@ -96,7 +96,7 @@ p {
 			<c:forEach var="board" items="${boardList}">
 				<tr>
 					<td>${board.boardNumber}</td>
-					<td><a href="/board/${board.boardNumber}">${board.boardTitle}</a></td>
+					<td><a href="/board/${board.boardNumber}">${board.boardTitle} (${board.boardCommentCount})</a></td>
 					<td>${board.boardWriterProfile}</td>
 					<td>${board.boardWriteDate}</td>
 					<td>${board.boardClickCount}</td>

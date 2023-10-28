@@ -51,5 +51,10 @@ public class BoardServiceImpl implements BoardService {
     public void updateDislikeCount(int boardNumber) {
         boardDao.updateDislikeCount(boardNumber);
     }
+    
+    @Override
+    public void increaseCommentCount(int boardNumber) {
+        boardDao.increaseCommentCount(boardNumber);
+    }
 
 }

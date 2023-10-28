@@ -81,5 +81,11 @@
     	WHERE board_number = #{boardNumber}
 	</update>
 	
+	<update id="increaseCommentCount" parameterType="int">
+    	UPDATE board
+    	SET board_comment_count = board_comment_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+	
 
 </mapper>

@@ -51,5 +51,10 @@ public class BoardDaoImpl implements BoardDao {
     public void updateDislikeCount(int boardNumber) {
         sqlSession.update("boardMapper.updateDislikeCount", boardNumber);
     }
+    
+    @Override
+    public void increaseCommentCount(int boardNumber) {
+        sqlSession.update("boardMapper.increaseCommentCount", boardNumber);
+    }
 
 }

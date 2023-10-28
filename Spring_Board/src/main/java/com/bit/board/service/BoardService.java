@@ -19,4 +19,5 @@ public interface BoardService {
     
     void updateLikeCount(int boardNumber);
     void updateDislikeCount(int boardNumber);
+    void increaseCommentCount(int boardNumber);
 }

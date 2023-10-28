@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="commentMapper">
+	<insert id="saveComment" parameterType="com.bit.board.model.dto.CommentDto">
+        INSERT INTO BoardComment (board_number, user_id, comment_content, comment_write_date, comment_user_profile)
+        VALUES (#{boardNumber}, #{userId}, #{commentContent}, SYSTIMESTAMP, #{commentUserProfile})
+    </insert>
 
+    <select id="getCommentsByBoardNumber" parameterType="int" resultType="com.bit.board.model.dto.CommentDto">
+        SELECT * FROM BoardComment WHERE board_number = #{boardNumber} ORDER BY comment_write_date DESC
+    </select>
 
 </mapper>
