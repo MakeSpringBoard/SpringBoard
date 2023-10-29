@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+	<select id="getAllBoards"
+		resultType="com.bit.board.model.dto.BoardDto">
+		SELECT
+		board_number AS boardNumber,
+		board_title AS
+		boardTitle,
+		board_content AS boardContent,
+		board_image AS boardImage,
+		board_writer_profile AS boardWriterProfile,
+		board_write_date AS
+		boardWriteDate,
+		board_click_count AS boardClickCount,
+		board_like_count
+		AS boardLikeCount,
+		board_hate_count AS boardHateCount,
+		board_comment_count AS boardCommentCount
+		FROM
+		Board
+	</select>
+
+	<insert id="saveBoard"
+		parameterType="com.bit.board.model.dto.BoardDto">
+		INSERT INTO Board (board_title, board_content,
+		board_image, board_writer_id, board_writer_profile, board_write_date)
+		VALUES (#{boardTitle}, #{boardContent}, #{boardImage,
+		jdbcType=VARCHAR}, #{boardWriterId}, #{boardWriterProfile},
+		#{boardWriteDate})
+	</insert>
+
+	<select id="selectBoard" parameterType="int"
+		resultType="com.bit.board.model.dto.BoardDto">
+		SELECT
+		board_number AS boardNumber,
+		board_title AS boardTitle,
+		board_content AS boardContent,
+		board_image AS boardImage,
+		board_writer_id AS boardWriterId,
+		board_writer_profile AS boardWriterProfile,
+		board_write_date AS boardWriteDate,
+		board_click_count AS boardClickCount,
+		board_like_count AS boardLikeCount,
+		board_hate_count AS boardHateCount,
+		board_comment_count AS boardCommentCount
+		FROM Board
+		WHERE board_number = #{boardNumber}
+	</select>
+
+	<update id="updateBoard"
+		parameterType="com.bit.board.model.dto.BoardDto">
+		UPDATE board
+		SET board_title = #{boardTitle},
+		board_content = #{boardContent},
+		board_image = #{boardImage}
+		WHERE board_number = #{boardNumber}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE board_number = #{boardNumber}
+	</delete>
+	
+	<update id="increaseClickCount" parameterType="int">
+    	UPDATE board
+    	SET board_click_count = board_click_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+	
+	<update id="updateLikeCount" parameterType="int">
+    	UPDATE board
+    	SET board_like_count = board_like_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+
+	<update id="updateDislikeCount" parameterType="int">
+    	UPDATE board
+    	SET board_hate_count = board_hate_count + 1
+    	WHERE board_number = #{boardNumber}
+	</update>
+	
+
+</mapper>
