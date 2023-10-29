@@ -1,6 +1,7 @@
 package com.bit.board.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -38,6 +39,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(UserDto userDto) {
         sqlSession.update("userMapper.updateUser", userDto);
+    }
+    
+    @Override
+    public List<UserDto> getAllUsers() {
+        return sqlSession.selectList("userMapper.getAllUsers");
     }
 
 }

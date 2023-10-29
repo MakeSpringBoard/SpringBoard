@@ -1,5 +1,7 @@
 package com.bit.board.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserDto userDto) {
         userDAO.updateUser(userDto);
+    }
+    
+    @Override
+    public List<UserDto> getAllUsers() {
+        return userDAO.getAllUsers();
     }
 
 }

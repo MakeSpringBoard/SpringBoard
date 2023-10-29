@@ -24,5 +24,10 @@
     	SET user_password = #{userPassword}, user_name = #{userName}, user_address = #{userAddress}
     	WHERE user_id = #{userId}
 	</update>
+	
+	<select id="getAllUsers" resultType="com.bit.board.model.dto.UserDto">
+    	SELECT * FROM BoardUser
+	</select>
+	
 
 </mapper>

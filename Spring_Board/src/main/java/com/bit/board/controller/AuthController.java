@@ -1,5 +1,8 @@
 package com.bit.board.controller;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +72,11 @@ public class AuthController {
     }
 	
 	@RequestMapping("/memberManage")
-    public String memberManage() {
-        return "board/memberManage";
-    }
+	public String memberManage(Model model) {
+	    List<UserDto> userList = userService.getAllUsers();
+	    model.addAttribute("userList", userList);
+	    return "board/memberManage";
+	}
 
 	
 }
