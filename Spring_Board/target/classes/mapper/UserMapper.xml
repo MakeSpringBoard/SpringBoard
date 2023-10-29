@@ -1,1 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+
+	<insert id="registerUser"
+		parameterType="com.bit.board.model.dto.UserDto">
+		INSERT INTO BoardUser (user_id, user_password, user_name, user_address)
+		VALUES (#{userId}, #{userPassword}, #{userName}, #{userAddress})
+	</insert>
+
+	<select id="getUserByIdAndPassword" parameterType="map"
+		resultType="com.bit.board.model.dto.UserDto">
+		SELECT * FROM BoardUser WHERE user_id = #{userId} AND user_password =
+		#{userPassword}
+	</select>
+
+	<select id="getUserById" parameterType="string" resultType="com.bit.board.model.dto.UserDto">
+    	SELECT * FROM BoardUser WHERE user_id = #{userId}
+	</select>
+	
+	<update id="updateUser" parameterType="com.bit.board.model.dto.UserDto">
+    	UPDATE BoardUser
+    	SET user_password = #{userPassword}, user_name = #{userName}, user_address = #{userAddress}
+    	WHERE user_id = #{userId}
+	</update>
+	
+	<select id="getAllUsers" resultType="com.bit.board.model.dto.UserDto">
+    	SELECT * FROM BoardUser
+	</select>
+	
+
+</mapper>

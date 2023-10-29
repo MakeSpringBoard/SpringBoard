@@ -1,16 +1,24 @@
 package com.bit.board.model.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BoardDto {
 	private int boardNumber;
 	private String boardTitle;
 	private String boardContent;
 	private String boardImage;
+	private String boardWriterId;
 	private String boardWriterProfile;
 	private String boardWriteDate;
 	private int boardClickCount;
 	private int boardLikeCount;
 	private int boardHateCount;
 	private int boardCommentCount;
+	
+	public void setBoardWriteDateToNow() {
+        this.boardWriteDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 	
 	public int getBoardNumber() {
 		return boardNumber;
@@ -72,6 +80,13 @@ public class BoardDto {
 	public void setBoardCommentCount(int boardCommentCount) {
 		this.boardCommentCount = boardCommentCount;
 	}
-	
+
+	public String getBoardWriterId() {
+        return boardWriterId;
+    }
+
+    public void setBoardWriterId(String boardWriterId) {
+        this.boardWriterId = boardWriterId;
+    }
 	
 }
