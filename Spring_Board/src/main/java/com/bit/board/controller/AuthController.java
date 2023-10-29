@@ -67,6 +67,11 @@ public class AuthController {
         session.setAttribute("user", userService.getUserById(userDto.getUserId()));
         return "redirect:/boardList";
     }
+	
+	@RequestMapping("/memberManage")
+    public String memberManage() {
+        return "board/memberManage";
+    }
 
 	
 }

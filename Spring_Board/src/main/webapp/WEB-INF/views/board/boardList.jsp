@@ -82,6 +82,12 @@ p {
 		<c:if test="${empty sessionScope.user}">
 			<p>로그인하시면 이름을 표시합니다.</p>
 		</c:if>
+		
+		<c:if test="${sessionScope.user.userId == 'admin'}">
+			<form action="/memberManage" method="post" style="display: inline;">
+				<input type="submit" value="회원 관리" class="btn" />
+			</form>
+		</c:if>
 		<form action="/infoChange" method="post" style="display: inline;">
 			<input type="submit" value="정보 수정" class="btn" />
 		</form>

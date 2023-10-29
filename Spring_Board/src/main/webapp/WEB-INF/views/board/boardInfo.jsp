@@ -74,33 +74,33 @@ img {
 }
 
 .comment {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;  /* 댓글 간의 간격 조정 */
-    display: flex;  /* Flexbox 레이아웃 사용 */
-    align-items: center;  /* 세로 중앙 정렬 */
-    justify-content: space-between;  /* 양쪽에 여백을 두고 중앙에 내용을 배치 */
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px; /* 댓글 간의 간격 조정 */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	align-items: center; /* 세로 중앙 정렬 */
+	justify-content: space-between; /* 양쪽에 여백을 두고 중앙에 내용을 배치 */
 }
 
 .comment-body {
-    display: flex;  /* Flexbox 레이아웃 사용 */
-    align-items: center;  /* 세로 중앙 정렬 */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	align-items: center; /* 세로 중앙 정렬 */
 }
 
 .comment-author {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #333;
-    margin-right: 10px;  /* 작성자와 내용 사이의 간격 조정 */
+	font-weight: bold;
+	font-size: 1.1em;
+	color: #333;
+	margin-right: 10px; /* 작성자와 내용 사이의 간격 조정 */
 }
 
 .comment-time {
-    font-size: 0.9em;
-    color: #888;
+	font-size: 0.9em;
+	color: #888;
 }
 
 .comment-content {
-    flex-grow: 1;  /* 남은 공간을 채우도록 설정 */
+	flex-grow: 1; /* 남은 공간을 채우도록 설정 */
 }
 
 .comment-form {
@@ -146,8 +146,17 @@ img {
 		<div class="buttons">
 			<c:if test="${board.boardWriterId == user.userId}">
 				<button onclick="location.href='/editBoard/${board.boardNumber}'">수정</button>
-				<button onclick="location.href='/deleteBoard/${board.boardNumber}'">삭제</button>
 			</c:if>
+			<c:choose>
+					<c:when test="${user.userId == 'admin'}">
+						<button
+							onclick="location.href='/deleteBoard/${board.boardNumber}'">삭제</button>
+					</c:when>
+					<c:when test="${board.boardWriterId == user.userId}">
+						<button
+							onclick="location.href='/deleteBoard/${board.boardNumber}'">삭제</button>
+					</c:when>
+				</c:choose>
 			<button onclick="location.href='/boardList'">목록</button>
 		</div>
 		<div class="like-dislike-section">
@@ -188,7 +197,9 @@ img {
 
 	<!-- 댓글 섹션 -->
 	<div class="comments-section">
-		<h3>댓글 <span id="comment-count"></span></h3>
+		<h3>
+			댓글 <span id="comment-count"></span>
+		</h3>
 		<div id="comments-container">
 			<!-- 기존 댓글 목록을 여기에 표시 -->
 		</div>
@@ -196,7 +207,8 @@ img {
 		<div class="comment-form">
 			<textarea id="comment-input" class="comment-input"
 				placeholder="댓글을 입력하세요..."></textarea>
-			<button class="comment-submit-btn" id="submitCommentButton">댓글 작성</button>
+			<button class="comment-submit-btn" id="submitCommentButton">댓글
+				작성</button>
 		</div>
 	</div>
 
